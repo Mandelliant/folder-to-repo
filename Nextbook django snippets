@@ -1,0 +1,64 @@
+
+  <div>
+      <h3><a href="/">Back to home</a></h3>
+  </div>
+
+  {% for Book in books %}
+      <div>
+
+          <p>Title: {{ Book.title }}</p>
+          <p>Author: {{ Book.author }}</p>
+
+      </div>
+  {% endfor %}
+
+<html>
+
+  <div>
+      <h3><a href="/">Back to home</a></h3>
+  </div>
+    
+    <p>Title: {{ Book.title }}</p>
+    <p>Author: {{ Book.author }}</p>
+
+</html>
+
+
+
+disabled="disabled"
+
+
+
+
+a href="/newbook/"
+
+<select id="nextbook-menu-select">
+
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+
+onsubmit="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+
+
+
+
+
+
+Old way to clear form:
+
+
+'''
+    if request.method == 'POST':
+        form = AddBook(request.POST)
+
+        if form.is_valid():
+            addedbook = form.save(commit=False)
+            addedbook.save()
+            return HttpResponseRedirect('/newbook/')
+
+    else:
+        form = AddBook()
+
+    return render(request, 'newbook/index.html', {'form': form})
+'''
+
+

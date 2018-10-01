@@ -1,0 +1,189 @@
+
+
+<nav>
+      <form method="GET">
+        <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+          <option value="">Select one...</option>
+          <option value="newbook"><a href="/newbook/">Add a new book</a></option>
+          <option value="nextbook"><a href="/nextbook/">Get a reading suggestion</a></option>
+        </select>
+        <br><br>
+        <input type="submit">
+      </form>
+    </nav>2
+
+
+
+
+
+
+
+    from django.db import models
+
+# Create your models here.
+
+class RandomManager(models.Manager):
+
+    def get_query_set(self):
+        return super(RandomManager, self).get_query_set().order_by('?')
+
+
+
+class Book(models.Model):
+    book_number = models.IntegerField(default=1, unique=True)
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+
+    objects = modesl.Manager()
+    randoms = RandomManager()
+
+    def __str__(self):
+        return self.title
+
+
+
+
+
+
+nextbook templates index.html
+
+
+<html>
+
+
+  <head>
+    <title>Nextbook</title>
+  </head>
+
+
+  <div>
+       <h3><a href="/">Back to home</a></h3>
+   </div>
+    <h3>Next you should read:</h3>
+     <p>Title: {{ Book.title }}</p>
+     <p>Author: {{ Book.author }}</p>
+
+</html>
+
+
+
+
+
+<div>
+       <h3><a href="/">Back to home</a></h3>
+  </div>
+
+     <p>Title: {{ Book.title }}</p>
+     <p>Author: {{ Book.author }}</p>
+
+
+
+
+
+
+
+
+
+# This file contains the WSGI configuration required to serve up your
+# Django app
+import os
+import sys
+
+# Add your project directory to the sys.path
+settings_path = '/home/mandelliant/mandelliant.pythonanywhere.com/djangosite'
+sys.path.insert(0, settings_path)
+
+# Set environment variable to tell django where your settings.py is
+os.environ['DJANGO_SETTINGS_MODULE'] = 'djangosite.settings'
+
+# Set the 'application' variable to the Django wsgi app
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
+
+
+
+
+
+
+  <body>
+  {% block content %}
+      <h3>New book</h3>
+      <form name="newBook" method="POST" class="post-form">{% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="save btn btn-default">Add book</button>
+      </form>
+  {% endblock %}
+  <br>
+  <h3><a href="/">Back to home</a></h3>
+
+  </body>
+
+
+
+
+
+
+<button type="submit" class="save btn btn-default">Add book</button>
+
+<input type="button" value="Submit" id="btnsubmit" onclick="submitForm()">
+
+<script>
+function submitForm() {
+   // Get the first form with the name
+   // Usually the form name is not repeated
+   // but duplicate names are possible in HTML
+   // Therefore to work around the issue, enforce the correct index
+   var frm = document.getElementsByName('contact-form')[0];
+   frm.submit(); // Submit the form
+   frm.reset();  // Reset all form data
+   return false; // Prevent page refresh
+}
+</script>
+
+
+
+
+
+
+
+
+
+'''
+def library(request):
+
+    form = AddBook()
+
+    if request.method == "POST":
+
+        form = PostForm(request.POST)
+
+
+    else:
+        form = AddBook()
+
+    return render(request, 'newbook/index.html', {'form': form})
+
+
+
+def library(request):
+
+    if request.method == "POST":
+
+        form = AddBook(request.POST)
+
+        if form.is_valid():
+            addedbook = form.save(commit=False)
+            addedbook.save()
+    else:
+        form = AddBook()
+    return render(request, 'newbook/index.html', {'form': form})
+'''
+
+
+
+
+
+
+
+

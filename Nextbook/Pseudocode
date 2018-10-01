@@ -1,0 +1,108 @@
+Pseudocode
+
+file
+  __init__.py
+      def csv file path
+
+      def feature selector
+        when user runs program, present options:
+          "What do you want to do?"
+            Add a book
+            Get a suggestion
+
+            if input = add a book
+              run NewBook
+
+            if input = get a suggestion
+              run NextBook
+
+  Book.py
+
+      class Book(object):
+
+      def add_book
+        fields = [new_book_id,nbt,author]
+        with csv open as library:
+
+          writer = csv.writer(library, delimeter=',')
+
+          reader = csv.DictReader
+
+          last_id = read library row book_id for highest value
+
+          new_book_id = last_id + 1
+
+          writer.writerow(fields)
+
+          return "Added {}".format(newbook)
+
+      def what_book
+        with open csv
+          reader = csv.DictReader
+          rows = check row 'status' for all rows with value = 'to read'
+          book_choice = random selection from rows
+          suggestion = select book by key and get title and author
+
+          return '{title} by {author}'.format(**suggestion)
+
+
+
+  menu.py
+    while True:
+      print("Select one:")
+      print("1. Add book to the library")
+      print("2. Get a suggestion")
+
+      user_input = input("\nWhat do you want to do?").lower()
+        if user_input == "1":
+
+          run NewBook
+
+        elif user_input == "2":
+
+          run NextBook
+
+        else:
+          print("Please select 1 or 2")
+
+
+
+  NewBook.py
+    while True
+      print Add new book to the library
+
+      nbt = input(Title: )
+      author = input(Author: )
+      newbook = '{} by {}'.format(nbt, author)
+
+
+      print (NewBook.add_book(nbt, author))
+
+      Do you want to add another book?
+
+      if yes: run again
+
+      else: return to menu
+
+
+
+  NextBook.py
+    while True
+      user_input Do you need a book suggestion? Yes or no?
+
+      if yes:
+        print(NextBook.what_book())
+
+        Do you need another suggestion?
+
+        if yes:
+          run again
+
+        if no:
+          return to menu
+
+      elif end:
+        break
+
+      else:
+        return to menu
